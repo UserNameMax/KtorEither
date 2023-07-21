@@ -1,3 +1,7 @@
+package domain
+
+import network.Api
+
 class UseCase(private val api: Api) {
     suspend fun getPet() = api.getPet()
 

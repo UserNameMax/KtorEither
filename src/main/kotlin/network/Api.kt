@@ -1,3 +1,9 @@
+package network
+
+import network.model.Either
+import network.model.ErrorResponse
+import utils.KtorEitherPlugin
+import network.dto.Pet
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*

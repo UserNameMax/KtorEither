@@ -1,6 +1,7 @@
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.update
+package presentation
+
+import domain.UseCase
+import network.model.Either
 
 class Presenter(private val useCase: UseCase) {
     suspend fun showName() {
