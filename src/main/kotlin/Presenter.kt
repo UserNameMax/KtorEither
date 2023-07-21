@@ -10,7 +10,7 @@ class Presenter(private val useCase: UseCase) {
         runBlocking {
             launch {
                 val str = when (val response = useCase.get()) {
-                    is Either.Success -> response.data
+                    is Either.Success -> response.data.name
                     is Either.Error -> ""
                 }
                 mutableState.update { str }
