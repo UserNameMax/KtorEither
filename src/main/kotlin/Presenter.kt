@@ -3,28 +3,25 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
 class Presenter(private val useCase: UseCase) {
-    private val mutableState = MutableStateFlow("")
+    suspend fun showName() {
+        val str = when (val response = useCase.getPet()) {
+            is Either.Success -> response.data.name
+            is Either.Error -> response.error.description
+        }
+        println(str)
+    }
 
-    init {
-        runBlocking {
-            launch {
-                val str = when (val response = useCase.get()) {
-                    is Either.Success -> response.data.name
-                    is Either.Error -> response.error.description
-                }
-                mutableState.update { str }
-            }
-            launch {
-                mutableState.collect {
-                    println(it)
-                }
-            }
+    suspend fun showList() {
+        val response = useCase.getPets()
+        val list = when (response) {
+            is Either.Error -> null
+            is Either.Success -> response.data.map { it.name }
+        }
+        if (list == null) {
+            println((response as Either.Error).error.description)
+        } else {
+            println(list)
         }
     }
 
-    fun show() {
-        runBlocking {
-            launch { delay(10000L) }
-        }
-    }
 }

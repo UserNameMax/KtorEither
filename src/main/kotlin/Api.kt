@@ -15,5 +15,9 @@ class Api {
         return response.body()
     }
 
+    suspend fun getPets(): Either<ErrorResponse, List<Pet>> {
+        val response = client.get("https://petstore.swagger.io/v2/pet/findByStatus?status=sold")
+        return response.body()
+    }
 
 }
