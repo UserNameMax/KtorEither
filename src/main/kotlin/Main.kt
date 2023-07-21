@@ -1,3 +1,6 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
+    val api = Api()
+    val useCase = UseCase(api)
+    val presenter = Presenter(useCase)
+    presenter.show()
 }
